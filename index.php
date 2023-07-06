@@ -11,20 +11,42 @@
 </head>
     <body>
         <div id="app">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                                <h1>PHP TO DO LIST JSON</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li v-for="(item, index) in myList" :key="index">
+                                {{item.text}}
+                            </li>
+                        </ul>
 
-        <div>
-            <ul>
-                <li v-for="(item, index) in myList" :key="index">
-                    {{item.text}}
-                    
-                </li>
-            </ul>
-            
-        
-        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                        <div class="input-group">
+                            <input type="text" @keyup.enter="updateList" v-model="todoItem"  placeholder="Todo" class="form-control px-3">
+                            <button class="btn btn-success mx-2" @click="updateList">Aggiungi</button>
+                            
+                        </div>
+                
+                
+                        </div>
 
+                    </div>
+                </div>
 
-
+            </div>
         </div>
 
         <!-- SCRIPT -->
