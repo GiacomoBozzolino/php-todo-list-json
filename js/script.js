@@ -1,36 +1,31 @@
-const {createApp} = Vue;
-
+const { createApp } = Vue;
 
 createApp({
-    data(){
-        return{
+    data() {
+        return {
             apiUrl:'server.php',
             todoItem: '',
-            myList:'',
-                
+            myList: null,
         }
     },
     mounted() {
-        // CHIAMATA AXIOS PER RECUPERARE LA LISTA DAL SERVER
-        axios.get(this.apiUrl).then((response) =>{
+        axios.get(this.apiUrl).then(response => {
             this.myList = response.data;
-        });
-
+            console.log(this.myList)
+        })
     },
-
     methods: {
-        updateList(){
-           let obj = this.todoItem
-
-            axios.post(this.apiUrl, {obj}, {headers: {'Content-Type':'multipart/form-data'}}).then((response) => {
-                this.todoItem='';
+        addTask() {
+            const data = {
+                'text': this.todoItem,
+                'done': false,
+            }
+            axios.post(this.apiUrl, data, {
+                headers: { 'Content-type': 'multipart/form-data' }
+            }).then((response) => {
+                this.todoItem = '';
                 this.myList = response.data;
-
             })
         }
     },
-
-
-
-
-}).mount('#app');
+}).mount('#app')

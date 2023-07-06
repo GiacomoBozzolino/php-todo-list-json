@@ -1,32 +1,13 @@
 <?php
-// recupero il contenuto del file
-    $array= file_get_contents('data/todo_list.json');
 
-    // converto il contenuto del file così da usarlo in php
-    $phpArray= json_decode ($array, true);
-    
-    if(isset($_POST['obj'])){
-        $obj = [
-            'text' => $_POST['obj'],
-            'done'=> false,
-            ];
+$string = file_get_contents('data/todo_list.json');
+$array = json_decode($string, true);
 
+if(isset($_POST['text']) && $_POST['text'] !== '') {
+    array_push($array, $_POST);
+    file_put_contents('data/todo_list.json', json_encode($array));
+}
 
-
-        array_push($phpArray, $obj );
-
-        $array_encoded = json_encode($phpArray);
-      
-        file_put_contents('data/todo_list.json',  $array_encoded);
-
-       
-    }
-
-    header('Content-Type: application/json');
-    echo json_encode($phpArray);
-        
-
-
-
-
+header('Content-type: application/json');
+echo json_encode($array);
 ?>
