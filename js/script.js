@@ -19,18 +19,14 @@ createApp({
     },
 
     methods: {
-        updateList(todoItem){
-            const obj = {
-                text: todoItem,
-                done: false,
-            }
+        updateList(){
+           let obj = this.todoItem
 
-            axios.post(this.apiUrls, obj, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
+            axios.post(this.apiUrl, {obj}, {headers: {'Content-Type':'multipart/form-data'}}).then((response) => {
                 this.todoItem='';
                 this.myList = response.data;
 
-            });
-
+            })
         }
     },
 
