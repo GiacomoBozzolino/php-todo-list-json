@@ -17,11 +17,11 @@ createApp({
     methods: {
         addTask() {
             const data = {
-                'text': this.todoItem,
-                'done': false,
+                todoItem : this.todoItem,
+                
             }
-            axios.post(this.apiUrl, data, {
-                headers: { 'Content-type': 'multipart/form-data' }
+
+            axios.post(this.apiUrl, data, {headers: { 'Content-type': 'multipart/form-data' }
             }).then((response) => {
                 this.todoItem = '';
                 this.myList = response.data;
